@@ -1,5 +1,7 @@
 import { coverageConfigDefaults, defineConfig } from 'vitest/config';
 
+import PanoptesReporter from '@panoptes/reporter-vitest';
+
 /**
  * CircleCI reports the wrong number of threads to Node.js, so we need to set it manually. Unit
  * tests are running with the xlarge resource class, which has 8 vCPUs.
@@ -31,6 +33,9 @@ if (shouldRunStorybookTests) {
 }
 
 export default defineConfig({
+  optimizeDeps: {
+    include: ['@panoptes/reporter-vitest', '@panoptes/shared'],
+  },
   test: {
     env: {
       NODE_ENV: 'test',
@@ -39,6 +44,16 @@ export default defineConfig({
     pool: 'threads',
     maxWorkers: threadCount,
     projects,
+
+    reporters: [
+      'default',
+      new PanoptesReporter({
+        convexUrl: 'https://impartial-chinchilla-443.convex.cloud',
+        projectName: process.env.PANOPTES_PROJECT_NAME || 'storybook',
+        environment: process.env.NODE_ENV || 'development',
+        ci: process.env.CI === 'true',
+      }),
+    ],
 
     coverage: {
       provider: 'istanbul',

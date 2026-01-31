@@ -155,6 +155,11 @@
     "vitest": "^4.0.14",
     "wait-on": "^8.0.3"
   },
+  "devDependencies": {
+    "@panoptes/reporter-playwright": "file:../../panoptes/packages/reporters/playwright",
+    "@panoptes/reporter-vitest": "file:../../panoptes/packages/reporters/vitest",
+    "@panoptes/shared": "file:../../panoptes/packages/shared"
+  },
   "dependenciesMeta": {
     "ejs": {
       "built": false
