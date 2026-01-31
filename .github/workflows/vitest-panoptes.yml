@@ -5,9 +5,7 @@ name: Vitest (Panoptes)
 #   CONVEX_URL = your production Convex deployment URL (e.g. https://your-deployment.convex.cloud)
 on:
   push:
-    branches: [main, next]
   pull_request:
-    branches: [main, next]
 
 env:
   NODE_OPTIONS: '--max_old_space_size=4096'
