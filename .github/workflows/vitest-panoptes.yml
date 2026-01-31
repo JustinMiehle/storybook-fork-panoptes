@@ -1,0 +1,38 @@
+name: Vitest (Panoptes)
+
+# Runs vitest and sends results to your production Convex via the Panoptes reporter.
+# Add CONVEX_URL to this repo's Actions secrets (Settings → Secrets → Actions):
+#   CONVEX_URL = your production Convex deployment URL (e.g. https://your-deployment.convex.cloud)
+on:
+  push:
+    branches: [main, next]
+  pull_request:
+    branches: [main, next]
+
+env:
+  NODE_OPTIONS: '--max_old_space_size=4096'
+  # Panoptes reporter sends results to this Convex HTTP endpoint (ingestTestRunHttp)
+  CONVEX_URL: ${{ secrets.CONVEX_URL }}
+
+jobs:
+  vitest:
+    name: Vitest → Convex
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js and Install Dependencies
+        uses: ./.github/actions/setup-node-and-install
+        with:
+          install-code-deps: true
+
+      - name: Compile
+        run: yarn task --task compile --start-from=compile
+
+      - name: Install Playwright (Chromium)
+        run: cd code && yarn exec playwright install chromium --with-deps
+
+      - name: Run Vitest
+        run: yarn test

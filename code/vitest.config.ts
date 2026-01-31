@@ -1,6 +1,6 @@
-import { coverageConfigDefaults, defineConfig } from 'vitest/config';
+import { coverageConfigDefaults, defineConfig } from "vitest/config";
 
-import PanoptesReporter from '@panoptes/reporter-vitest';
+import PanoptesReporter from "@panoptes/reporter-vitest";
 
 /**
  * CircleCI reports the wrong number of threads to Node.js, so we need to set it manually. Unit
@@ -11,17 +11,23 @@ import PanoptesReporter from '@panoptes/reporter-vitest';
  * @see https://circleci.com/docs/configuration-reference/#x86
  * @see .circleci/config.yml#L187
  */
-const threadCount = process.env.CI ? (process.platform === 'win32' ? 4 : 7) : undefined;
-const shouldRunStorybookTests = !(process.env.CI && process.platform === 'win32');
+const threadCount = process.env.CI
+	? process.platform === "win32"
+		? 4
+		: 7
+	: undefined;
+const shouldRunStorybookTests = !(
+	process.env.CI && process.platform === "win32"
+);
 
 const projects = [
-  'addons/*/vitest.config.ts',
-  'frameworks/*/vitest.config.ts',
-  'lib/*/vitest.config.ts',
-  'core/vitest.config.ts',
-  'builders/*/vitest.config.ts',
-  'presets/*/vitest.config.ts',
-  'renderers/*/vitest.config.ts',
+	"addons/*/vitest.config.ts",
+	"frameworks/*/vitest.config.ts",
+	"lib/*/vitest.config.ts",
+	"core/vitest.config.ts",
+	"builders/*/vitest.config.ts",
+	"presets/*/vitest.config.ts",
+	"renderers/*/vitest.config.ts",
 ];
 
 /**
@@ -29,43 +35,45 @@ const projects = [
  * these tests, that need browser-mode cannot be run/added
  */
 if (shouldRunStorybookTests) {
-  projects.push('vitest.config.storybook.ts');
+	projects.push("vitest.config.storybook.ts");
 }
 
 export default defineConfig({
-  optimizeDeps: {
-    include: ['@panoptes/reporter-vitest', '@panoptes/shared'],
-  },
-  test: {
-    env: {
-      NODE_ENV: 'test',
-    },
+	optimizeDeps: {
+		include: ["@panoptes/reporter-vitest", "@panoptes/shared"],
+	},
+	test: {
+		env: {
+			NODE_ENV: "test",
+		},
 
-    pool: 'threads',
-    maxWorkers: threadCount,
-    projects,
+		pool: "threads",
+		maxWorkers: threadCount,
+		projects,
 
-    reporters: [
-      'default',
-      new PanoptesReporter({
-        convexUrl: 'https://impartial-chinchilla-443.convex.cloud',
-        projectName: process.env.PANOPTES_PROJECT_NAME || 'storybook',
-        environment: process.env.NODE_ENV || 'development',
-        ci: process.env.CI === 'true',
-      }),
-    ],
+		reporters: [
+			"default",
+			new PanoptesReporter({
+				convexUrl:
+					process.env.CONVEX_URL ||
+					"https://impartial-chinchilla-443.convex.cloud",
+				projectName: process.env.PANOPTES_PROJECT_NAME || "storybook",
+				environment: process.env.NODE_ENV || "development",
+				ci: process.env.CI === "true",
+			}),
+		],
 
-    coverage: {
-      provider: 'istanbul',
-      exclude: [
-        ...coverageConfigDefaults.exclude,
-        '**/__mocks/**',
-        '**/dist/**',
-        'playwright.config.ts',
-        'vitest-setup.ts',
-        'vitest.helpers.ts',
-        '**/*.stories.*',
-      ],
-    },
-  },
+		coverage: {
+			provider: "istanbul",
+			exclude: [
+				...coverageConfigDefaults.exclude,
+				"**/__mocks/**",
+				"**/dist/**",
+				"playwright.config.ts",
+				"vitest-setup.ts",
+				"vitest.helpers.ts",
+				"**/*.stories.*",
+			],
+		},
+	},
 });
