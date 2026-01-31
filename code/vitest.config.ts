@@ -1,6 +1,12 @@
+import { existsSync } from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
 import { coverageConfigDefaults, defineConfig } from "vitest/config";
 
-import PanoptesReporter from "@panoptes/reporter-vitest";
+import PanoptesReporter from "@justinmiehle/reporter-vitest";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /**
  * CircleCI reports the wrong number of threads to Node.js, so we need to set it manually. Unit
@@ -32,15 +38,25 @@ const projects = [
 
 /**
  * On CI, we run our own unit tests, but for performance reasons, we don't install playwright, thus
- * these tests, that need browser-mode cannot be run/added
+ * these tests, that need browser-mode cannot be run/added.
+ * The storybook project requires @storybook/addon-vitest to be built (dist/); skip it when not built
+ * so `yarn test` works locally without a full compile.
  */
-if (shouldRunStorybookTests) {
+const addonVitestPluginPath = path.join(
+	__dirname,
+	"addons",
+	"vitest",
+	"dist",
+	"vitest-plugin",
+	"index.js",
+);
+if (shouldRunStorybookTests && existsSync(addonVitestPluginPath)) {
 	projects.push("vitest.config.storybook.ts");
 }
 
 export default defineConfig({
 	optimizeDeps: {
-		include: ["@panoptes/reporter-vitest", "@panoptes/shared"],
+		include: ["@justinmiehle/reporter-vitest", "@justinmiehle/shared"],
 	},
 	test: {
 		env: {
