@@ -156,9 +156,9 @@
 		"wait-on": "^8.0.3"
 	},
 	"devDependencies": {
-		"@justinmiehle/reporter-playwright": "^0.0.6",
-		"@justinmiehle/reporter-vitest": "^0.0.6",
-		"@justinmiehle/shared": "^0.0.6"
+		"@justinmiehle/reporter-playwright": "^0.0.7",
+		"@justinmiehle/reporter-vitest": "^0.0.7",
+		"@justinmiehle/shared": "^0.0.7"
 	},
 	"dependenciesMeta": {
 		"ejs": {
