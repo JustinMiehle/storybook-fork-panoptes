@@ -56,7 +56,7 @@
     "serialize-javascript": "^3.1.0",
     "type-fest": "~2.19",
     "typescript": "^5.9.3",
-    "@panoptes/shared": "file:../panoptes/packages/shared",
+    "@justinmiehle/shared": "^0.0.6",
     "@vitest/reporter": "npm:vitest@^4.0.14"
   },
   "devDependencies": {

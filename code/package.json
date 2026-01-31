@@ -49,10 +49,18 @@
 		}
 	},
 	"lint-staged": {
-		"*.{html,js,json,jsx,mjs,ts,tsx}": ["yarn lint:js:cmd --fix"],
-		"*.ejs": ["yarn --cwd ../scripts ejslint"],
-		"*.{css,html,json,md,yml}": ["yarn lint:prettier"],
-		"package.json": ["yarn lint:package"]
+		"*.{html,js,json,jsx,mjs,ts,tsx}": [
+			"yarn lint:js:cmd --fix"
+		],
+		"*.ejs": [
+			"yarn --cwd ../scripts ejslint"
+		],
+		"*.{css,html,json,md,yml}": [
+			"yarn lint:prettier"
+		],
+		"package.json": [
+			"yarn lint:package"
+		]
 	},
 	"browserslist": [
 		"chrome >= 131",
@@ -184,15 +192,38 @@
 		"includedScripts": []
 	},
 	"pr-log": {
-		"skipLabels": ["cleanup"],
+		"skipLabels": [
+			"cleanup"
+		],
 		"validLabels": [
-			["BREAKING CHANGE", "Breaking Changes"],
-			["feature request", "Features"],
-			["bug", "Bug Fixes"],
-			["documentation", "Documentation"],
-			["maintenance", "Maintenance"],
-			["build", "Build"],
-			["dependencies", "Dependency Upgrades"]
+			[
+				"BREAKING CHANGE",
+				"Breaking Changes"
+			],
+			[
+				"feature request",
+				"Features"
+			],
+			[
+				"bug",
+				"Bug Fixes"
+			],
+			[
+				"documentation",
+				"Documentation"
+			],
+			[
+				"maintenance",
+				"Maintenance"
+			],
+			[
+				"build",
+				"Build"
+			],
+			[
+				"dependencies",
+				"Dependency Upgrades"
+			]
 		]
 	}
 }
