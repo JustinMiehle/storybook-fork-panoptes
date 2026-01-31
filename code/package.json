@@ -148,9 +148,9 @@
 		"wait-on": "^8.0.3"
 	},
 	"devDependencies": {
-		"@justinmiehle/reporter-playwright": "^0.0.1",
-		"@panoptes/reporter-vitest": "file:../../panoptes/packages/reporters/vitest",
-		"@panoptes/shared": "file:../../panoptes/packages/shared"
+		"@justinmiehle/reporter-playwright": "^0.0.6",
+		"@justinmiehle/reporter-vitest": "^0.0.6",
+		"@justinmiehle/shared": "^0.0.6"
 	},
 	"dependenciesMeta": {
 		"ejs": {
