@@ -3563,12 +3563,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@justinmiehle/shared@npm:^0.0.9":
-  version: 0.0.9
-  resolution: "@justinmiehle/shared@npm:0.0.9"
+"@justinmiehle/shared@npm:^0.0.10":
+  version: 0.0.10
+  resolution: "@justinmiehle/shared@npm:0.0.10"
   dependencies:
     zod: "npm:^3.22.4"
-  checksum: 10c0/750bd0b8847db54112a9943499ab761aa95f7c9301f5e0d59275e2d6eaa9acda044ede9ac9c300a71af66e2d0db9066ce12eb8a4b36d408d968f4fef62a5e586
+  checksum: 10c0/ee035378d5c5191a504b731156f38a3ed67b6c9cd9025cfa36d1c2e09a0be48338dc7040faa5b116de0fbf9eac6b34a3755e56380b696662405ef1f48677535b
   languageName: node
   linkType: hard
 
